@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.dmagdaleno.ceep.R
 import com.dmagdaleno.ceep.dao.NotaDAO
 import com.dmagdaleno.ceep.model.Nota
-import com.dmagdaleno.ceep.ui.adapter.ListaNotasAdapter
+import com.dmagdaleno.ceep.ui.rv.adapter.ListaNotasAdapter
 import kotlinx.android.synthetic.main.activity_lista_notas.*
 
 class ListaNotasActivity : AppCompatActivity() {
@@ -21,6 +21,6 @@ class ListaNotasActivity : AppCompatActivity() {
             dao.insere(nota)
         }
 
-        lista_notas.adapter = ListaNotasAdapter(this, dao.todas())
+        lista_notas.adapter = ListaNotasAdapter( dao.todas())
     }
 }
