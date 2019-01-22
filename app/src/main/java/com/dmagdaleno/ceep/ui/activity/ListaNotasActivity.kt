@@ -17,12 +17,19 @@ class ListaNotasActivity : AppCompatActivity() {
 
         val dao = NotaDAO()
 
-        for(i in 1 .. 10000){
-            val nota = Nota("Nota $i", "Descrição da nota $i")
-            dao.insere(nota)
-        }
+        criaNotasDeExemplo(dao)
 
+        configuraRecyclerView(dao)
+    }
+
+    private fun configuraRecyclerView(dao: NotaDAO) {
         lista_notas.layoutManager = LinearLayoutManager(this)
         lista_notas.adapter = ListaNotasAdapter(this, dao.todas())
+    }
+
+    private fun criaNotasDeExemplo(dao: NotaDAO) {
+        val nota1 = Nota("Primeira Nota", "Descrição da nota")
+        val nota2 = Nota("Segunda Nota", "Descrição beeeeee maior que a descrição da primeira nota")
+        dao.insere(nota1, nota2)
     }
 }
