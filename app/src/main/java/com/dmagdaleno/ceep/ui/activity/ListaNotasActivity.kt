@@ -23,7 +23,6 @@ class ListaNotasActivity : AppCompatActivity() {
     }
 
     private fun configuraRecyclerView(dao: NotaDAO) {
-        lista_notas.layoutManager = LinearLayoutManager(this)
         lista_notas.adapter = ListaNotasAdapter(this, dao.todas())
     }
 
