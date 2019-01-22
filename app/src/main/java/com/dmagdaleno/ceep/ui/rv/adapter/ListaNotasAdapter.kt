@@ -32,6 +32,10 @@ class ListaNotasAdapter(
         private val descricao = item.item_nota_descricao
 
         fun vincula(nota: Nota) {
+            preencheCampos(nota)
+        }
+
+        private fun preencheCampos(nota: Nota) {
             titulo.text = nota.titulo
             descricao.text = nota.descricao
         }
