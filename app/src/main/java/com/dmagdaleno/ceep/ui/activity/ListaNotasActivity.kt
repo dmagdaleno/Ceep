@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity
 import com.dmagdaleno.ceep.dao.NotaDAO
 import com.dmagdaleno.ceep.model.Nota
 import com.dmagdaleno.ceep.R
+import com.dmagdaleno.ceep.constants.Extras
+import com.dmagdaleno.ceep.constants.RequestCode
+import com.dmagdaleno.ceep.constants.ResultCode
 import com.dmagdaleno.ceep.ui.rv.adapter.ListaNotasAdapter
 import kotlinx.android.synthetic.main.activity_lista_notas.*
 
@@ -27,7 +30,7 @@ class ListaNotasActivity : AppCompatActivity() {
 
         lista_notas_insere_nota.setOnClickListener {
             val i = Intent(this, FormularioNotaActivity::class.java)
-            startActivityForResult(i, 1)
+            startActivityForResult(i, RequestCode.FORM_SALVA_NOTA)
         }
     }
 
@@ -44,11 +47,20 @@ class ListaNotasActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if(requestCode == 1 && resultCode == 2 && data.hasExtra("nota")){
-            val nota = data.getSerializableExtra("nota") as Nota
-            adapter.adiciona(nota)
+        if(menuSalvaNota(requestCode, resultCode, data)){
+            adicionaNotaAoAdapter(data)
         }
 
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+    private fun adicionaNotaAoAdapter(data: Intent) {
+        val nota = data.getSerializableExtra(Extras.NOTA) as Nota
+        adapter.adiciona(nota)
+    }
+
+    private fun menuSalvaNota(requestCode: Int, resultCode: Int, data: Intent) =
+            requestCode == RequestCode.FORM_SALVA_NOTA &&
+            resultCode  == ResultCode.SALVA_NOTA &&
+            data.hasExtra(Extras.NOTA)
 }
