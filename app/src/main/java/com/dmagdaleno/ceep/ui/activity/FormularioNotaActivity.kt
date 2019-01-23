@@ -1,5 +1,6 @@
 package com.dmagdaleno.ceep.ui.activity
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -27,7 +28,9 @@ class FormularioNotaActivity : AppCompatActivity() {
                 val titulo = formulario_nota_titulo.text.toString()
                 val descricao = formulario_nota_descricao.text.toString()
                 val nota = Nota(titulo, descricao)
-                NotaDAO().insere(nota)
+                val resultado = Intent()
+                resultado.putExtra("nota", nota)
+                setResult(2, resultado)
                 finish()
             }
             else -> { }
