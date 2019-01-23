@@ -1,5 +1,6 @@
 package com.dmagdaleno.ceep.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -20,6 +21,10 @@ class ListaNotasActivity : AppCompatActivity() {
         criaNotasDeExemplo(dao)
 
         configuraRecyclerView(dao)
+
+        lista_notas_insere_nota.setOnClickListener {
+            startActivity(Intent(this, FormularioNotaActivity::class.java))
+        }
     }
 
     private fun configuraRecyclerView(dao: NotaDAO) {
@@ -30,5 +35,10 @@ class ListaNotasActivity : AppCompatActivity() {
         val nota1 = Nota("Primeira Nota", "Descrição da nota")
         val nota2 = Nota("Segunda Nota", "Descrição beeeeee maior que a descrição da primeira nota")
         dao.insere(nota1, nota2)
+    }
+
+    override fun onResume() {
+        configuraRecyclerView(NotaDAO())
+        super.onResume()
     }
 }
