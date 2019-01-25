@@ -3,6 +3,7 @@ package com.dmagdaleno.ceep.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.dmagdaleno.ceep.dao.NotaDAO
 import com.dmagdaleno.ceep.model.Nota
 import com.dmagdaleno.ceep.R
@@ -13,6 +14,10 @@ import com.dmagdaleno.ceep.ui.rv.adapter.ListaNotasAdapter
 import kotlinx.android.synthetic.main.activity_lista_notas.*
 
 class ListaNotasActivity : AppCompatActivity() {
+
+    companion object {
+        const val TAG = "ListaNotasActivity"
+    }
 
     private lateinit var adapter: ListaNotasAdapter
 
@@ -36,6 +41,11 @@ class ListaNotasActivity : AppCompatActivity() {
 
     private fun configuraRecyclerView() {
         adapter = ListaNotasAdapter(this, notas)
+
+        adapter.onItemClick = {
+            Log.i(TAG, "onItemClick foi implementado")
+        }
+        
         lista_notas.adapter = adapter
     }
 
