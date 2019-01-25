@@ -3,6 +3,7 @@ package com.dmagdaleno.ceep.ui.rv.adapter
 import android.content.Context
 import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,14 @@ import kotlinx.android.synthetic.main.item_nota.view.*
 class ListaNotasAdapter(
         private val context: Context,
         private val notas: MutableList<Nota>) : Adapter<ListaNotasAdapter.NotaViewHolder>() {
+
+    var onItemClick: () -> Unit = {
+        Log.w(TAG, "onItemClick não foi implementado")
+    }
+
+    companion object {
+        const val TAG = "ListaNotasAdapter"
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotaViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_nota, parent, false)
@@ -26,9 +35,15 @@ class ListaNotasAdapter(
 
     override fun getItemCount() = notas.size
 
-    class NotaViewHolder(item: View): ViewHolder(item) {
+    inner class NotaViewHolder(item: View): ViewHolder(item) {
         private val titulo = item.item_nota_titulo
         private val descricao = item.item_nota_descricao
+
+        init {
+            item.setOnClickListener {
+                onItemClick()
+            }
+        }
 
         fun vincula(nota: Nota) {
             preencheCampos(nota)
