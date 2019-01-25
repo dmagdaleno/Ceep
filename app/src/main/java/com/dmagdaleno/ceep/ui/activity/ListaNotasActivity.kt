@@ -42,8 +42,8 @@ class ListaNotasActivity : AppCompatActivity() {
     private fun configuraRecyclerView() {
         adapter = ListaNotasAdapter(this, notas)
 
-        adapter.onItemClick = {
-            Log.i(TAG, "onItemClick foi implementado")
+        adapter.onItemClick = { nota ->
+            Log.i(TAG, "Clicou em ${nota.titulo}")
         }
 
         lista_notas.adapter = adapter
