@@ -45,14 +45,15 @@ class ListaNotasActivity : AppCompatActivity() {
         adapter.onItemClick = {
             Log.i(TAG, "onItemClick foi implementado")
         }
-        
+
         lista_notas.adapter = adapter
     }
 
     private fun criaNotasDeExemplo(dao: NotaDAO): MutableList<Nota> {
-        val nota1 = Nota("Primeira Nota", "Descrição da nota")
-        val nota2 = Nota("Segunda Nota", "Descrição beeeeeem maior que a descrição da primeira nota")
-        dao.insere(nota1, nota2)
+        for(i in 1..10){
+            val nota1 = Nota("Nota n.$i", "Descrição da nota")
+            dao.insere(nota1)
+        }
         return dao.todas()
     }
 
