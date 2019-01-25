@@ -15,7 +15,7 @@ class ListaNotasAdapter(
         private val context: Context,
         private val notas: MutableList<Nota>) : Adapter<ListaNotasAdapter.NotaViewHolder>() {
 
-    var onItemClick: () -> Unit = {
+    var onItemClick: (nota: Nota) -> Unit = {
         Log.w(TAG, "onItemClick não foi implementado")
     }
 
@@ -38,14 +38,16 @@ class ListaNotasAdapter(
     inner class NotaViewHolder(item: View): ViewHolder(item) {
         private val titulo = item.item_nota_titulo
         private val descricao = item.item_nota_descricao
+        private lateinit var nota: Nota
 
         init {
             item.setOnClickListener {
-                onItemClick()
+                onItemClick(nota)
             }
         }
 
         fun vincula(nota: Nota) {
+            this.nota = nota
             preencheCampos(nota)
         }
 
