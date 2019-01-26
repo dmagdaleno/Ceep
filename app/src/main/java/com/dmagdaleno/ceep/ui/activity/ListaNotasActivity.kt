@@ -43,7 +43,10 @@ class ListaNotasActivity : AppCompatActivity() {
         adapter = ListaNotasAdapter(this, notas)
 
         adapter.onItemClick = { nota ->
-            Log.i(TAG, "Clicou em ${nota.titulo}")
+            Log.d(TAG, "Clicou em ${nota.titulo}")
+            val i = Intent(this, FormularioNotaActivity::class.java)
+            i.putExtra(Extras.NOTA, nota)
+            startActivityForResult(i, RequestCode.FORM_EDITA_NOTA)
         }
 
         lista_notas.adapter = adapter
@@ -58,9 +61,15 @@ class ListaNotasActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if(menuSalvaNota(requestCode, resultCode, data)){
-            adicionaNotaAoAdapter(data)
+        when {
+            menuSalvaNota(requestCode, resultCode, data) -> {
+                adicionaNotaAoAdapter(data)
+            }
+            menuEditaNota(requestCode, resultCode, data) -> {
+                adicionaNotaAoAdapter(data)
+            }
         }
+
 
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -74,4 +83,9 @@ class ListaNotasActivity : AppCompatActivity() {
             requestCode == RequestCode.FORM_SALVA_NOTA &&
             resultCode  == ResultCode.SALVA_NOTA &&
             data.hasExtra(Extras.NOTA)
+
+    private fun menuEditaNota(requestCode: Int, resultCode: Int, data: Intent) =
+            requestCode == RequestCode.FORM_EDITA_NOTA &&
+                    resultCode  == ResultCode.SALVA_NOTA &&
+                    data.hasExtra(Extras.NOTA)
 }
