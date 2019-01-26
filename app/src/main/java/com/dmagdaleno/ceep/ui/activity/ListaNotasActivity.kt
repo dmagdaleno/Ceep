@@ -42,9 +42,10 @@ class ListaNotasActivity : AppCompatActivity() {
     private fun configuraRecyclerView() {
         adapter = ListaNotasAdapter(this, notas)
 
-        adapter.onItemClick = { nota ->
+        adapter.onItemClick = { posicao, nota ->
             Log.d(TAG, "Clicou em ${nota.titulo}")
             val i = Intent(this, FormularioNotaActivity::class.java)
+            i.putExtra(Extras.POSICAO, posicao)
             i.putExtra(Extras.NOTA, nota)
             startActivityForResult(i, RequestCode.FORM_EDITA_NOTA)
         }
@@ -54,8 +55,8 @@ class ListaNotasActivity : AppCompatActivity() {
 
     private fun criaNotasDeExemplo(dao: NotaDAO): MutableList<Nota> {
         for(i in 1..10){
-            val nota1 = Nota("Nota n.$i", "Descrição da nota")
-            dao.insere(nota1)
+            val nota = Nota("Nota n.$i", "Descrição da nota")
+            dao.insere(nota)
         }
         return dao.todas()
     }
@@ -66,7 +67,7 @@ class ListaNotasActivity : AppCompatActivity() {
                 adicionaNotaAoAdapter(data)
             }
             menuEditaNota(requestCode, resultCode, data) -> {
-                adicionaNotaAoAdapter(data)
+                editaNotaDoAdapter(data)
             }
         }
 
@@ -79,6 +80,12 @@ class ListaNotasActivity : AppCompatActivity() {
         adapter.adiciona(nota)
     }
 
+    private fun editaNotaDoAdapter(data: Intent) {
+        val posicao = data.getSerializableExtra(Extras.POSICAO) as Int
+        val nota = data.getSerializableExtra(Extras.NOTA) as Nota
+        adapter.altera(posicao, nota)
+    }
+
     private fun menuSalvaNota(requestCode: Int, resultCode: Int, data: Intent) =
             requestCode == RequestCode.FORM_SALVA_NOTA &&
             resultCode  == ResultCode.SALVA_NOTA &&
@@ -87,5 +94,6 @@ class ListaNotasActivity : AppCompatActivity() {
     private fun menuEditaNota(requestCode: Int, resultCode: Int, data: Intent) =
             requestCode == RequestCode.FORM_EDITA_NOTA &&
                     resultCode  == ResultCode.SALVA_NOTA &&
-                    data.hasExtra(Extras.NOTA)
+                    data.hasExtra(Extras.NOTA) &&
+                    data.hasExtra(Extras.POSICAO)
 }
