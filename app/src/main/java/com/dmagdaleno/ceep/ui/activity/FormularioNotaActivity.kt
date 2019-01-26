@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.activity_formulario_nota.*
 
 class FormularioNotaActivity : AppCompatActivity() {
 
+    private var posicao: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_formulario_nota)
@@ -20,6 +22,10 @@ class FormularioNotaActivity : AppCompatActivity() {
         if(intent.hasExtra(Extras.NOTA)){
             val nota = intent.getSerializableExtra(Extras.NOTA) as Nota
             exibeNota(nota)
+        }
+
+        if(intent.hasExtra(Extras.POSICAO)){
+            posicao = intent.getSerializableExtra(Extras.POSICAO) as Int
         }
     }
 
@@ -54,6 +60,7 @@ class FormularioNotaActivity : AppCompatActivity() {
     private fun configuraResultado(nota: Nota) {
         val resultado = Intent()
         resultado.putExtra(Extras.NOTA, nota)
+        resultado.putExtra(Extras.POSICAO, posicao)
         setResult(ResultCode.SALVA_NOTA, resultado)
     }
 }
