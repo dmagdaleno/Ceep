@@ -15,7 +15,7 @@ class ListaNotasAdapter(
         private val context: Context,
         private val notas: MutableList<Nota>) : Adapter<ListaNotasAdapter.NotaViewHolder>() {
 
-    var onItemClick: (nota: Nota) -> Unit = {
+    var onItemClick: (posicao: Int, nota: Nota) -> Unit = { _, _ ->
         Log.w(TAG, "onItemClick não foi implementado")
     }
 
@@ -42,7 +42,7 @@ class ListaNotasAdapter(
 
         init {
             item.setOnClickListener {
-                onItemClick(nota)
+                onItemClick(adapterPosition, nota)
             }
         }
 
@@ -59,6 +59,11 @@ class ListaNotasAdapter(
 
     fun adiciona(nota: Nota){
         this.notas.add(nota)
+        this.notifyDataSetChanged()
+    }
+
+    fun altera(posicao: Int, nota: Nota) {
+        this.notas[posicao] = nota
         this.notifyDataSetChanged()
     }
 }
