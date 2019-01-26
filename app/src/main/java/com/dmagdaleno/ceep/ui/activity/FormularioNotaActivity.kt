@@ -16,6 +16,11 @@ class FormularioNotaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_formulario_nota)
+
+        if(intent.hasExtra(Extras.NOTA)){
+            val nota = intent.getSerializableExtra(Extras.NOTA) as Nota
+            exibeNota(nota)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -39,6 +44,11 @@ class FormularioNotaActivity : AppCompatActivity() {
         val titulo = formulario_nota_titulo.text.toString()
         val descricao = formulario_nota_descricao.text.toString()
         return Nota(titulo, descricao)
+    }
+
+    private fun exibeNota(nota: Nota) {
+        formulario_nota_titulo.setText(nota.titulo)
+        formulario_nota_descricao.setText(nota.descricao)
     }
 
     private fun configuraResultado(nota: Nota) {
