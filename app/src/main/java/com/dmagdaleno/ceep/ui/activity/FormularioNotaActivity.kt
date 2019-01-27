@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_formulario_nota.*
 
 class FormularioNotaActivity : AppCompatActivity() {
 
-    private var posicao: Int = 0
+    private var posicao: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +59,12 @@ class FormularioNotaActivity : AppCompatActivity() {
 
     private fun configuraResultado(nota: Nota) {
         val resultado = Intent()
+
+        posicao?.let {
+            resultado.putExtra(Extras.POSICAO, it)
+        }
+
         resultado.putExtra(Extras.NOTA, nota)
-        resultado.putExtra(Extras.POSICAO, posicao)
         setResult(ResultCode.SALVA_NOTA, resultado)
     }
 }
