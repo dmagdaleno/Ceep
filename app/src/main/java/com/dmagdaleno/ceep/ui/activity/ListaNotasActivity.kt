@@ -34,20 +34,25 @@ class ListaNotasActivity : AppCompatActivity() {
         configuraRecyclerView()
 
         lista_notas_insere_nota.setOnClickListener {
-            val i = Intent(this, FormularioNotaActivity::class.java)
-            startActivityForResult(i, RequestCode.FORM_SALVA_NOTA)
+            abreFormularioNota(RequestCode.FORM_SALVA_NOTA)
         }
+    }
+
+    private fun abreFormularioNota(requestCode: Int,
+                                   posicao: Int? = null,
+                                   nota: Nota? = null) {
+
+        val i = Intent(this, FormularioNotaActivity::class.java)
+        posicao?.let { i.putExtra(Extras.POSICAO, it) }
+        nota?.let { i.putExtra(Extras.NOTA, it) }
+        startActivityForResult(i, requestCode)
     }
 
     private fun configuraRecyclerView() {
         adapter = ListaNotasAdapter(this, notas)
 
         adapter.onItemClick = { posicao, nota ->
-            Log.d(TAG, "Clicou em ${nota.titulo}")
-            val i = Intent(this, FormularioNotaActivity::class.java)
-            i.putExtra(Extras.POSICAO, posicao)
-            i.putExtra(Extras.NOTA, nota)
-            startActivityForResult(i, RequestCode.FORM_EDITA_NOTA)
+            abreFormularioNota(RequestCode.FORM_EDITA_NOTA, posicao, nota)
         }
 
         lista_notas.adapter = adapter
