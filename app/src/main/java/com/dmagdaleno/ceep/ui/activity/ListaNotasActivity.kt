@@ -4,13 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.dmagdaleno.ceep.dao.NotaDAO
 import com.dmagdaleno.ceep.model.Nota
 import com.dmagdaleno.ceep.R
 import com.dmagdaleno.ceep.constants.Extras
 import com.dmagdaleno.ceep.constants.RequestCode
-import com.dmagdaleno.ceep.constants.ResultCode
 import com.dmagdaleno.ceep.ui.rv.adapter.ListaNotasAdapter
 import kotlinx.android.synthetic.main.activity_lista_notas.*
 
