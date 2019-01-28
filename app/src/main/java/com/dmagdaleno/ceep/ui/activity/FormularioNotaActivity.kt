@@ -1,5 +1,6 @@
 package com.dmagdaleno.ceep.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -65,6 +66,6 @@ class FormularioNotaActivity : AppCompatActivity() {
         }
 
         resultado.putExtra(Extras.NOTA, nota)
-        setResult(ResultCode.SALVA_NOTA, resultado)
+        setResult(Activity.RESULT_OK, resultado)
     }
 }
