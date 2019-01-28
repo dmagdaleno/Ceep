@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import com.dmagdaleno.ceep.R
 import com.dmagdaleno.ceep.constants.Extras
-import com.dmagdaleno.ceep.constants.ResultCode
 import com.dmagdaleno.ceep.model.Nota
 import kotlinx.android.synthetic.main.activity_formulario_nota.*
 
