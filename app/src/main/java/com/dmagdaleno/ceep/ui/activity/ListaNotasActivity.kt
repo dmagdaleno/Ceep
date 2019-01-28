@@ -1,5 +1,6 @@
 package com.dmagdaleno.ceep.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -93,12 +94,12 @@ class ListaNotasActivity : AppCompatActivity() {
 
     private fun menuSalvaNota(requestCode: Int, resultCode: Int, data: Intent) =
             requestCode == RequestCode.FORM_SALVA_NOTA &&
-            resultCode  == ResultCode.SALVA_NOTA &&
+            resultCode  == Activity.RESULT_OK &&
             data.hasExtra(Extras.NOTA)
 
     private fun menuEditaNota(requestCode: Int, resultCode: Int, data: Intent) =
             requestCode == RequestCode.FORM_EDITA_NOTA &&
-                    resultCode  == ResultCode.SALVA_NOTA &&
+                    resultCode  == Activity.RESULT_OK &&
                     data.hasExtra(Extras.NOTA) &&
                     data.hasExtra(Extras.POSICAO)
 }
