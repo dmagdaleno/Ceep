@@ -97,7 +97,7 @@ class ListaNotasActivity : AppCompatActivity() {
 
     private fun menuEditaNota(requestCode: Int, resultCode: Int, data: Intent) =
             requestCode == RequestCode.FORM_EDITA_NOTA &&
-                    resultCode  == Activity.RESULT_OK &&
-                    data.hasExtra(Extras.NOTA) &&
-                    data.hasExtra(Extras.POSICAO)
+            resultCode  == Activity.RESULT_OK &&
+            data.hasExtra(Extras.NOTA) &&
+            data.hasExtra(Extras.POSICAO)
 }
