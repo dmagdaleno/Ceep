@@ -72,12 +72,13 @@ class ListaNotasActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val extras = data ?: return
         when {
-            menuSalvaNota(requestCode, resultCode, data) -> {
-                adicionaNotaAoAdapter(data)
+            menuSalvaNota(requestCode, resultCode, extras) -> {
+                adicionaNotaAoAdapter(extras)
             }
-            menuEditaNota(requestCode, resultCode, data) -> {
-                editaNotaDoAdapter(data)
+            menuEditaNota(requestCode, resultCode, extras) -> {
+                editaNotaDoAdapter(extras)
             }
         }
 
@@ -96,16 +97,14 @@ class ListaNotasActivity : AppCompatActivity() {
         adapter.altera(posicao, nota)
     }
 
-    private fun menuSalvaNota(requestCode: Int, resultCode: Int, data: Intent?) =
+    private fun menuSalvaNota(requestCode: Int, resultCode: Int, data: Intent) =
             requestCode == RequestCode.FORM_SALVA_NOTA &&
             resultCode  == Activity.RESULT_OK &&
-            data != null &&
             data.hasExtra(Extras.NOTA)
 
-    private fun menuEditaNota(requestCode: Int, resultCode: Int, data: Intent?) =
+    private fun menuEditaNota(requestCode: Int, resultCode: Int, data: Intent) =
             requestCode == RequestCode.FORM_EDITA_NOTA &&
             resultCode  == Activity.RESULT_OK &&
-            data != null &&
             data.hasExtra(Extras.NOTA) &&
             data.hasExtra(Extras.POSICAO)
 }
