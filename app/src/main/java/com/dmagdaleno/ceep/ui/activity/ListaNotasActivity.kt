@@ -13,6 +13,7 @@ import com.dmagdaleno.ceep.constants.RequestCode
 import com.dmagdaleno.ceep.ui.rv.adapter.ListaNotasAdapter
 import com.dmagdaleno.ceep.ui.rv.helper.callback.NotaItemTouchHelperCallback
 import kotlinx.android.synthetic.main.activity_lista_notas.*
+import java.util.*
 
 class ListaNotasActivity : AppCompatActivity() {
 
@@ -58,7 +59,7 @@ class ListaNotasActivity : AppCompatActivity() {
 
         lista_notas.adapter = adapter
 
-        val helper = ItemTouchHelper(NotaItemTouchHelperCallback())
+        val helper = ItemTouchHelper(NotaItemTouchHelperCallback(adapter))
         helper.attachToRecyclerView(lista_notas)
     }
 
