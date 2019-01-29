@@ -4,12 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.helper.ItemTouchHelper
 import com.dmagdaleno.ceep.dao.NotaDAO
 import com.dmagdaleno.ceep.model.Nota
 import com.dmagdaleno.ceep.R
 import com.dmagdaleno.ceep.constants.Extras
 import com.dmagdaleno.ceep.constants.RequestCode
 import com.dmagdaleno.ceep.ui.rv.adapter.ListaNotasAdapter
+import com.dmagdaleno.ceep.ui.rv.helper.callback.NotaItemTouchHelperCallback
 import kotlinx.android.synthetic.main.activity_lista_notas.*
 
 class ListaNotasActivity : AppCompatActivity() {
@@ -55,6 +57,9 @@ class ListaNotasActivity : AppCompatActivity() {
         }
 
         lista_notas.adapter = adapter
+
+        val helper = ItemTouchHelper(NotaItemTouchHelperCallback())
+        helper.attachToRecyclerView(lista_notas)
     }
 
     private fun criaNotasDeExemplo(dao: NotaDAO): MutableList<Nota> {
