@@ -66,4 +66,9 @@ class ListaNotasAdapter(
         this.notas[posicao] = nota
         this.notifyDataSetChanged()
     }
+
+    fun remove(posicao: Int) {
+        this.notas.removeAt(posicao)
+        notifyDataSetChanged()
+    }
 }
