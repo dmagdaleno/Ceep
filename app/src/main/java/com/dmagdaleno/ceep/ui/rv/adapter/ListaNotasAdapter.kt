@@ -70,11 +70,11 @@ class ListaNotasAdapter(
 
     fun remove(posicao: Int) {
         this.notas.removeAt(posicao)
-        notifyDataSetChanged()
+        notifyItemRemoved(posicao)
     }
 
     fun troca(posicaoInicial: Int, posicaoFinal: Int) {
         Collections.swap(notas, posicaoInicial, posicaoFinal)
-        notifyDataSetChanged()
+        notifyItemMoved(posicaoInicial, posicaoFinal)
     }
 }
