@@ -13,13 +13,21 @@ import kotlinx.android.synthetic.main.activity_formulario_nota.*
 
 class FormularioNotaActivity : AppCompatActivity() {
 
+    companion object {
+        const val TITULO_APP_BAR_INSERE = "Insere Nota"
+        const val TITULO_APP_BAR_ALTERA = "Altera Nota"
+    }
+
     private var posicao: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_formulario_nota)
 
+        title = TITULO_APP_BAR_INSERE
+
         if(intent.hasExtra(Extras.NOTA)){
+            title = TITULO_APP_BAR_ALTERA
             val nota = intent.getSerializableExtra(Extras.NOTA) as Nota
             exibeNota(nota)
         }
