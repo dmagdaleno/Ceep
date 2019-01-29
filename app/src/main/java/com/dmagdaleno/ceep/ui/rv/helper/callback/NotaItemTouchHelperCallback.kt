@@ -14,12 +14,14 @@ class NotaItemTouchHelperCallback(
     }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-        return false
+        val posicaoInicial = viewHolder.adapterPosition
+        val posicaoFinal = target.adapterPosition
+        adapter.troca(posicaoInicial, posicaoFinal)
+        return true
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val posicao = viewHolder.adapterPosition
-        //NotaDAO().remove(posicao)
         adapter.remove(posicao)
     }
 }
