@@ -13,12 +13,12 @@ import com.dmagdaleno.ceep.constants.RequestCode
 import com.dmagdaleno.ceep.ui.rv.adapter.ListaNotasAdapter
 import com.dmagdaleno.ceep.ui.rv.helper.callback.NotaItemTouchHelperCallback
 import kotlinx.android.synthetic.main.activity_lista_notas.*
-import java.util.*
 
 class ListaNotasActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "ListaNotasActivity"
+        const val TITULO_APP_BAR = "Notas"
     }
 
     private lateinit var adapter: ListaNotasAdapter
@@ -28,6 +28,8 @@ class ListaNotasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_notas)
+
+        title = TITULO_APP_BAR
 
         val dao = NotaDAO()
 
