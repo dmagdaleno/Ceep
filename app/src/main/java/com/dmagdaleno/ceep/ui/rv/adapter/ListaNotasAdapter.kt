@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.dmagdaleno.ceep.R
 import com.dmagdaleno.ceep.model.Nota
 import kotlinx.android.synthetic.main.item_nota.view.*
+import java.util.*
 
 class ListaNotasAdapter(
         private val context: Context,
@@ -69,6 +70,11 @@ class ListaNotasAdapter(
 
     fun remove(posicao: Int) {
         this.notas.removeAt(posicao)
+        notifyDataSetChanged()
+    }
+
+    fun troca(posicaoInicial: Int, posicaoFinal: Int) {
+        Collections.swap(notas, posicaoInicial, posicaoFinal)
         notifyDataSetChanged()
     }
 }
